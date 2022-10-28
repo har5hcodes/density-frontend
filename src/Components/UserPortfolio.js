@@ -1,4 +1,3 @@
-import * as React from "react";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
@@ -7,19 +6,46 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
-function createData(user, stocks, fiat) {
-  return { user, stocks, fiat };
+import { useEffect, useState } from "react";
+import axios from "axios";
+import UserEdit from "./shared/UserEdit";
+function createData(user, userId, stocks, fiat) {
+  return { user, userId, stocks, fiat };
 }
 
-const rows = [
-  createData("A",   10, 2000 ),
-  createData("B", 10, 2000 ),
-  createData("C", 10, 2000),
-  createData("D", 10, 2000),
-  createData("E", 10, 2000),
-];
 
 const UserPorfolio = () => {
+  const [rows,setRows] = useState(); 
+  const headers = {
+    accept: "application/json",
+    "Content-Type": "application/json",
+    Authorization: localStorage.getItem("token"),
+  };
+  const getUsers = () => {
+    try {
+      axios
+        .get("http://localhost:5000/user/get-all", {
+          headers: headers,
+        })
+        .then((response) => {
+          let tempRow=[];
+          response.data.users.forEach((user)=>{
+            tempRow.push(createData(user.userName,user.userId, user.stockCount,user.fiat));
+          })
+          console.log(tempRow);
+          setRows(tempRow)
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    getUsers();
+  }, []);
   return (
     <>
       <TableContainer sx={{ maxWidth: 450 }}  component={Paper}>
@@ -33,18 +59,8 @@ const UserPorfolio = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
-              <TableRow
-                key={row.user}
-                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
-              >
-                <TableCell component="th" scope="row">
-                  {row.user}
-                </TableCell>
-                <TableCell align="right">{row.stocks}</TableCell>
-                <TableCell align="right">{row.fiat}</TableCell> 
-                <TableCell align="right"><Button>Edit</Button></TableCell> 
-              </TableRow>
+            {rows && rows.map((row) => (
+                <UserEdit row={row} getUsers={getUsers}/>
             ))}
           </TableBody>
         </Table>
