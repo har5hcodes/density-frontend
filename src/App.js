@@ -1,24 +1,22 @@
-import logo from './logo.svg';
+ 
 import './App.css';
+import LineGraph from './Components/LineGraph';
+import MarketPriceDisplay from './Components/MarketPriceDisplay';
+import OrderBook from './Components/OrderBook';
+import PlaceOrder from './Components/PlaceOrder';
+import TransactionHistory from './Components/TransactionHistory';
+import UserPorfolio from './Components/UserPortfolio';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+     <>
+       <MarketPriceDisplay/>
+       <TransactionHistory/>
+       <UserPorfolio/>
+       <OrderBook/>
+       <PlaceOrder/>
+       <LineGraph/>
+     </>
   );
 }
 
