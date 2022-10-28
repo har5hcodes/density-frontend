@@ -7,16 +7,16 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 
-function createData(user, type, qty, price ) {
-  return { user, type, qty, price };
+function createData(b_user,s_user, qty, price ) {
+  return { b_user, s_user , qty, price };
 }
 
 const rows = [
-  createData("A", "Buy", 6, 24 ),
-  createData("B", "Buy" , 6, 24),
-  createData("C", "Sell" , 3, 24),
-  createData("D", "Buy" , 2, 24),
-  createData("E", "Sell" , 6, 14),
+  createData("A", "B", 6, 24 ),
+  createData("B", "E" , 6, 24),
+  createData("C", "A" , 3, 24),
+  createData("D", "B" , 2, 24),
+  createData("E", "A" , 6, 14),
 ];
 
 const TransactionHistory = () => {
@@ -26,8 +26,8 @@ const TransactionHistory = () => {
         <Table sx={{ maxWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>User</TableCell> 
-              <TableCell align="right">Order type</TableCell>
+              <TableCell>Buyer</TableCell> 
+              <TableCell align="right">Seller</TableCell>
               <TableCell align="right">Qty.</TableCell>
               <TableCell align="right">Price</TableCell>
             </TableRow>
@@ -35,13 +35,13 @@ const TransactionHistory = () => {
           <TableBody>
             {rows.map((row) => (
               <TableRow
-                key={row.user}
+                key={row.b_user}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 <TableCell component="th" scope="row">
-                  {row.user}
+                  {row.b_user}
                 </TableCell>
-                <TableCell align="right">{row.type}</TableCell>
+                <TableCell align="right">{row.s_user}</TableCell>
                 <TableCell align="right">{row.qty}</TableCell>
                 <TableCell align="right">{row.price}</TableCell> 
               </TableRow>

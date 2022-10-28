@@ -1,21 +1,19 @@
- 
-import './App.css';
-import LineGraph from './Components/LineGraph';
-import MarketPriceDisplay from './Components/MarketPriceDisplay';
+import { Routes, Route } from "react-router-dom"; 
+import './App.css'; 
 import OrderBook from './Components/OrderBook';
 import PlaceOrder from './Components/PlaceOrder';
-import TransactionHistory from './Components/TransactionHistory';
-import UserPorfolio from './Components/UserPortfolio';
+import TransactionHistory from './Components/TransactionHistory'; 
+import Dashboard from './pages/Dashboard';
 
 function App() {
   return (
-     <>
-       <MarketPriceDisplay/>
-       <TransactionHistory/>
-       <UserPorfolio/>
-       <OrderBook/>
-       <PlaceOrder/>
-       <LineGraph/>
+     <>  
+       <Routes>
+        <Route path="/" element={<Dashboard/>} />
+        <Route path="/transaction-history" element={<TransactionHistory/>} />
+        <Route path="/order-book" element={<OrderBook/>} />
+        <Route path="/place-order" element={<PlaceOrder/>} /> 
+      </Routes>
      </>
   );
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { Line } from "react-chartjs-2";
+import { Box  } from "@mui/material";
 import {
   Chart as ChartJS,
   Title,
@@ -26,26 +27,13 @@ ChartJS.register(
 
 const LineGraph = () => {
   const [data, setData] = useState({
-    labels: [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-    ],
+    labels: ["", "", "", "", "", "", "", "", "", "", "", ""],
     datasets: [
       {
         label: "Last 10 points",
         data: [10, 20, 30, 42, 51, 82, 31, 59, 61, 73, 91, 58],
         backgroundColor: "yellow",
-        borderColor: "green", 
+        borderColor: "green",
         pointStyle: "rect",
         pointBorderColor: "blue",
         pointBackgroundColor: "#fff",
@@ -54,11 +42,17 @@ const LineGraph = () => {
     ],
   });
 
-
   return (
-    <div className="App" style={{ width: "800px", height: "800px" }}>
-      <Line data={data}>Hello</Line>
-    </div>
+    <Box
+      sx={{
+        width: "500px",
+        height: "500px", 
+      }}
+    >
+      <Line data={data}>
+        Hello
+      </Line>
+    </Box>
   );
 };
 
